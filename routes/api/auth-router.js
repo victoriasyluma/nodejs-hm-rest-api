@@ -4,7 +4,7 @@ const authController = require('../../controllers/auth-controller');
 const authRouter = express.Router();
 
 const { validateBody } = require('../../decoraters/validateBody');
-const { authenticate, upload } = require('../../middlewares');
+const { authenticate } = require('../../middlewares');
 
 const userSchemas = require('../../schemas/user-schemes');
 module.exports = authRouter;
@@ -24,10 +24,3 @@ authRouter.post(
 authRouter.get('/current', authenticate, authController.getCurrent);
 
 authRouter.post('/logout', authenticate, authController.logout);
-
-authRouter.patch(
-  '/avatars',
-  authenticate,
-  upload.single('avatar'),
-  authController.updateAvatar
-);
